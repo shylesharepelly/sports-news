@@ -10,14 +10,15 @@ function Home() {
     <div>
 
       <Appbar/>
+      <div >
+        <Livescore/>
 
-      <Livescore/>
+        <Articles/>
 
-      <Articles/>
+        <Favourites/>
 
-      <Favourites/>
-
-
+      </div>
+        
     </div>
   )
 }
