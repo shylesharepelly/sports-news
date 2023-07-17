@@ -1,10 +1,5 @@
-import React from 'react'
-import Logo from "../../assets/react.svg"
 
 function Livescore() {
-
-
-
 // const sportName = 'Football';
 // const teams = ['Team A', 'Team B'];
 // const scores = ['3', '2'];
@@ -59,10 +54,10 @@ function Livescore() {
     <div>
       <div className='font-bold text-xl px-5 py-4'>Live Games</div>
   
-    <div className="flex px-4 py-2 overflow-x-auto shadow">
+    <div className="flex px-4 py-2 overflow-x-auto shadow-lg">
        <div className="flex space-x-10">
           {sportNames.map((sportName, index) => (
-            <div className="bg-white rounded-lg shadow p-4 border border-black" key={sportName}>
+            <div className="bg-gray-100 rounded-lg shadow p-4 border border-black" key={sportName}>
               <div className="flex justify-between space-x-3" >
                 <p className="text-lg font-semibold">{sportName}</p>
                 <button

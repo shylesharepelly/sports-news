@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const Appbar = () => {
 
   return (
-    <Disclosure as="nav" className="bg-white shadow-lg">
+    <Disclosure as="nav" className="bg-gray-100 shadow-lg">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
