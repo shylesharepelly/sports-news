@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 
-function Favourites() {
+  const Favourites = () => {
   const items = [
     {
       id: 1,

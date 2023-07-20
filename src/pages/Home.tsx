@@ -4,7 +4,8 @@ import Favourites from './favourites'
 import Articles from './articles'
 import Appbar from '../layouts/Appbar'
 
-function Home() {
+
+const Home = () => {
   return (
 
     <div className='m-4'>

@@ -1,5 +1,6 @@
 
-function Livescore() {
+  const Livescore = () => {
+
 // const sportName = 'Football';
 // const teams = ['Team A', 'Team B'];
 // const scores = ['3', '2'];

@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 
-function Articles() {
+  const Articles = () => {
 
   const items = [
     {
