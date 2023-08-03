@@ -8,8 +8,8 @@ export const fetchMatches = async (dispatch: any) => {
       headers: { 'Content-Type': 'application/json'},
     });
     const data = await response.json();
-    console.log("data",data)
-    console.log("data",data.matches)
+    //console.log("data",data)
+    //console.log("data",data.matches)
     dispatch({ type: "FETCH_MATCHES_SUCCESS", payload: data.matches });
   } catch (error) {
     console.log('Error fetching matches:', error);
