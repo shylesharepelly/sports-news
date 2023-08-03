@@ -49,7 +49,10 @@ import {
   
     const fetchArticleData = async (id : number) => {
       try {
-        const response = await fetch(`${API_ENDPOINT}/articles/${id}`);
+        const response = await fetch(`${API_ENDPOINT}/articles/${id}`, {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch article data');
         }

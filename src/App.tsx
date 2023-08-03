@@ -4,15 +4,16 @@ import "./App.css";
 import router from "./routes";
 
 import { ArticlesProvider } from './context/articles/context.tsx'
+import { MatchesProvider } from "./context/livescores/context.tsx";
 
 const App = () => {
   return (
     <div>
-      <ArticlesProvider>
-      
-       <RouterProvider router={router} />
-         
-      </ArticlesProvider>
+      <MatchesProvider>
+        <ArticlesProvider>
+           <RouterProvider router={router} />
+        </ArticlesProvider>
+      </MatchesProvider>
     </div>
   );
 };
