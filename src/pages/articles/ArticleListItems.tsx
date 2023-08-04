@@ -96,7 +96,7 @@ import {
           className="relative z-50"
           >
           <div className="fixed inset-0 flex items-center justify-center p-4">
-              <Dialog.Panel className="w-full max-h p-4 max-w-xl rounded bg-white">
+              <Dialog.Panel className="w-full max-h-screen overflow-y-auto p-4 max-w-xl rounded bg-white">
               <div className="flex justify-end">
               <button onClick={() => setIsDialogOpen(false)}>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
@@ -104,9 +104,9 @@ import {
 </svg>
               </button>
             </div>
-              <Dialog.Title className="bg-white shadow-lg py-2">{articleData.title}</Dialog.Title>
+              <Dialog.Title key={selectedArticleId} className="bg-white shadow-lg font-bold text-xl py-2">{articleData.title}</Dialog.Title>
               <div className="ml-4">
-                    <img src={articleData.thumbnail} alt={articleData.title} className="w-full h-40 object-cover rounded" />
+                    <img src={articleData.thumbnail} alt={articleData.title} className="w-full h-40vh object-cover rounded" />
                 </div>
               <div>
                  {articleData.content}
