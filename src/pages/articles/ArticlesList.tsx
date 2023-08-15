@@ -15,8 +15,9 @@ const ArticlesList: React.FC = () => {
 
   const [selectedSport, setSelectedSport] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("date");
+  // eslint-disable-next-line
   const [filterValue, setFilterValue] = useState("");
-
+// eslint-disable-next-line
   const { articles, isLoading, isError, errorMessage } = state;
 
   const applyFilter = (article: any) => {
