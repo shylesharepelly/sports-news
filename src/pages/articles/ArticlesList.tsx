@@ -54,6 +54,13 @@ const ArticlesList: React.FC = () => {
       <div className="flex border bg-slate-200">
         <div className="w-full p-2">
           <div className="px-5 mb-4 flex">
+          <button  onClick={() => setSelectedSport("")}
+              className={`px-4 py-2 mr-2 text-sm font-medium rounded ${
+                selectedSport === "" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-600"
+              }`}
+            >
+              News
+            </button>
             {Array.from(new Set(articles.map((article: any) => article.sport.name))).map((sportName: any) => (
               <button
                 key={sportName}
@@ -86,7 +93,7 @@ const ArticlesList: React.FC = () => {
 
       
 
-      <div className="m-4">
+      <div className="m-4 bg-slate-200 ">
         {articles
           .filter(applyFilter)
           .sort(sortArticles)

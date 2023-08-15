@@ -54,7 +54,7 @@ import {
     return (
           <div>
           <div className='m-4'>
-              <div key={article.id} className="my-4 p-4 bg-gray-100 rounded-md flex">
+              <div key={article.id} className="my-4 p-4 bg-white rounded-md flex">
                   <div className="flex-1">
                       <div>
                       <h3 className="text-sm  mb-2">{article.sport.name}</h3>
@@ -62,7 +62,13 @@ import {
                       <p className="text-black-600 mb-2">{article.summary}</p>
                       </div>
                       <div className="flex justify-between items-center mb-2">
-                      <h3 className="text-xs text-gray-900">{article.date}</h3>
+                      <h3 className="text-xs text-gray-900">
+                      {new Date(article.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit",
+                      })}
+                      </h3>
                       <button onClick={() => handleLinkClick(article.id)} className=" text-black  underline">
                           Read More...
                       </button>

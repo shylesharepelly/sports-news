@@ -46,7 +46,7 @@ import ArticlesList from './ArticlesList';
     //     </div>
     //   ))}
     // </div>
-    <div>
+    <div className='bg-slate-200'>
       <ArticlesList/>
     </div>
   );
