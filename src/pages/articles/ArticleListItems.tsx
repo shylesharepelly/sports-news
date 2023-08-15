@@ -5,7 +5,7 @@ import {
   import { useState } from 'react';
   import { Dialog } from '@headlessui/react';
 
-  interface state{
+  interface Article{
     id: number;
     title: string;
     summary: string;
@@ -18,33 +18,19 @@ import {
     content: string;
   }
   
-  export default function ArticleListItems() {
+  export default function ArticleListItems({ article }: { article: Article }) {
     const state: any = useArticlesState();
   
-    const [selectedArticleId, setSelectedArticleId] = useState(null);
+    const [selectedArticleId, setSelectedArticleId] = useState<number | null>(null);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [articleData, setArticleData] = useState<state>(state);
+    const [articleData, setArticleData] = useState<Article | null>(null);
   
   
   
-    const { articles, isLoading, isError, errorMessage } = state;
-    //console.log(articles);
-   
-    if (articles.length === 0 && isLoading) {
-      return <span>Loading...</span>;
-    }
-    if (isError) {
-      return <span>{errorMessage}</span>;
-    }
-  
-  //   const handleLinkClick = () => {
-  //     setIsOpen(true);
-  //   };
-  
-    const handleLinkClick = async (articleId : any ) => {
-      setSelectedArticleId(articleId); // Set the selected article ID
-      setIsDialogOpen(true); // Open the dialog
-      await fetchArticleData(articleId); // Fetch data for the selected article
+    const handleLinkClick = async (articleId : number ) => {
+      setSelectedArticleId(articleId); 
+      setIsDialogOpen(true);
+      await fetchArticleData(articleId); 
     };
   
     const fetchArticleData = async (id : number) => {
@@ -56,9 +42,9 @@ import {
         if (!response.ok) {
           throw new Error('Failed to fetch article data');
         }
-        const data = await response.json();
+        const data : Article = await response.json();
         console.log("data",data)
-        setArticleData(data); // Set the fetched article data
+        setArticleData(data);
       } catch (error) {
         console.error('Error fetching article data:', error);
       }
@@ -68,7 +54,6 @@ import {
     return (
           <div>
           <div className='m-4'>
-              {articles.map((article:any) => (
               <div key={article.id} className="my-4 p-4 bg-gray-100 rounded-md flex">
                   <div className="flex-1">
                       <div>
@@ -87,7 +72,7 @@ import {
                       <img src={article.thumbnail} alt={article.title} className="w-40 h-40 object-cover rounded" />
                   </div>
               </div>
-              ))}
+            
           </div>
   
               <Dialog
@@ -104,6 +89,8 @@ import {
 </svg>
               </button>
             </div>
+            {articleData && (
+              <div>
               <Dialog.Title key={selectedArticleId} className="bg-white shadow-lg font-bold text-xl py-2">{articleData.title}</Dialog.Title>
               <div className="ml-4">
                     <img src={articleData.thumbnail} alt={articleData.title} className="w-full h-40vh object-cover rounded" />
@@ -111,6 +98,8 @@ import {
               <div>
                  {articleData.content}
               </div>
+              </div>
+            )}
               </Dialog.Panel>
           </div>
           </Dialog>
