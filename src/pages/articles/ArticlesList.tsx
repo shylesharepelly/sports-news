@@ -19,7 +19,12 @@ const ArticlesList: React.FC = () => {
   const [filterValue, setFilterValue] = useState("");
 // eslint-disable-next-line
   const { articles, isLoading, isError, errorMessage } = state;
-
+  if ( isLoading) {
+    return <span>Loading...</span>;
+  }
+  if (isError) {
+    return <span>{errorMessage}</span>;
+  }
   const applyFilter = (article: any) => {
     if (!selectedSport || article.sport.name === selectedSport) {
       switch (selectedFilter) {

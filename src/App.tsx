@@ -5,15 +5,21 @@ import router from "./routes";
 
 import { ArticlesProvider } from './context/articles/context.tsx'
 import { MatchesProvider } from "./context/livescores/context.tsx";
+import { TeamsProvider } from "./context/teams/context.tsx";
+import { SportsProvider } from "./context/sports/context.tsx";
 
 const App = () => {
   return (
     <div>
-      <MatchesProvider>
-        <ArticlesProvider>
-           <RouterProvider router={router} />
-        </ArticlesProvider>
-      </MatchesProvider>
+      <SportsProvider>
+        <TeamsProvider>
+          <MatchesProvider>
+            <ArticlesProvider>
+              <RouterProvider router={router} />
+            </ArticlesProvider>
+          </MatchesProvider>
+        </TeamsProvider>
+      </SportsProvider>
     </div>
   );
 };

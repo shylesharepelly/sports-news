@@ -8,7 +8,7 @@ export const fetchSports = async (dispatch: any) => {
       headers: { 'Content-Type': 'application/json'},
     });
     const data = await response.json();
-    console.log("data",data)
+   
     console.log("data",data.sports)
     dispatch({ type: "FETCH_SPORTS_SUCCESS", payload: data.sports });
   } catch (error) {

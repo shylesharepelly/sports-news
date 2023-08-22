@@ -1,13 +1,16 @@
-interface Article {
+type teamdata = {
+  id : number;
+  name : string;
+}
+
+export interface Article {
   id: number;
   title: string;
   thumbnail: string;
   summary : string;
   date: string;
-  sport : {
-    id : number;
-    name : string;
-  }
+  sport : teamdata;
+  teams:teamdata[]
   }
   
   export interface ArticlesState {

@@ -32,6 +32,7 @@ import {
       setIsDialogOpen(true);
       await fetchArticleData(articleId); 
     };
+    
   
     const fetchArticleData = async (id : number) => {
       try {
