@@ -1,6 +1,6 @@
 // import React from 'react'
 import Livescore from './livescores'
-import Favourites from './favourites'
+import Favourites from './favouritesBlock'
 import Articles from './articles'
 import Appbar from '../layouts/Appbar'
 

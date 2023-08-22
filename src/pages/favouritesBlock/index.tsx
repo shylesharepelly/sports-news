@@ -4,19 +4,6 @@ import { useEffect } from 'react';
 import Favourites from './Favourites';
 
   const Favouriteslist = () => {
-  const items = [
-    // {
-    //   id: 1,
-    //   title: 'Item 1',
-    //   details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    // },
-    // {
-    //   id: 2,
-    //   title: 'Item 2',
-    //   details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    // },
-    // // Add more items as needed
-  ];  
 
  
 
