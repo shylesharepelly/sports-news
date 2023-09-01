@@ -17,8 +17,6 @@ const Home = () => {
           </div>
           <h1 className="font-bold text-xl p-4">Trending News</h1>
           <div className="flex flex-col lg:flex-row">
-            
-      
             <div className="lg:w-3/4 shadow-lg">
               <Articles />
             </div>

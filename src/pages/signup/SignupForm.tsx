@@ -30,10 +30,11 @@ const SignupForm: React.FC = () => {
 
       const data = await response.json() as ApiResponse;
       localStorage.setItem("authToken", data.token);
+      console.log(data.token)
       localStorage.setItem("userData", JSON.stringify(data.user));
       console.log(data)
      
-      navigate("/dashboard");
+      navigate("/home");
     } catch (error) {
       console.error("Sign-up failed:", error);
     }

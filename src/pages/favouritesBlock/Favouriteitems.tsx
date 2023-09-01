@@ -91,11 +91,11 @@ const Favouriteitems = ({ selectedSport, selectedTeam }:FavouriteItemsProps) => 
                 <div className="flex-1 bg-white flex flex-col justify-center">
                 <div>
                     <h3 className="text-xl font-bold mb-2">{item.title}</h3>
-                    <p className="text-black-600 mb-2">{item.details}</p>
+                    <p className="text-black-600 mb-2">{item.summary}</p>
             
                     <div className="flex justify-center">
-                    <button onClick={() => handleLinkClick(item.id)} className=" text-black  underline">
-                          Read More...
+                    <button onClick={() => handleLinkClick(item.id)} className="w-full bg-black text-white py-1 ">
+                          Read More
                       </button>
                     </div>
                 </div>
