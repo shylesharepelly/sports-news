@@ -18,7 +18,7 @@ import { API_ENDPOINT } from '../config/constants';
 const Appbar = () => {
   const navigate = useNavigate();
   const authToken = localStorage.getItem("authToken");
-  console.log("auth",authToken)
+ // console.log("auth",authToken)
   const userData = localStorage.getItem("userData");
   // console.log("user",userData)
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -31,11 +31,11 @@ const Appbar = () => {
 
 
 
-  console.log("tempsports",tempFavouriteSports)
-  console.log("tempteams",tempFavouriteTeams)
+  // console.log("tempsports",tempFavouriteSports)
+  // console.log("tempteams",tempFavouriteTeams)
 
-  console.log("favsports",favouriteSports)
-  console.log("favteams",favouriteTeams)
+  // console.log("favsports",favouriteSports)
+  // console.log("favteams",favouriteTeams)
 
   const handleSportCheckbox = (event:any) =>{
     const { id, checked } = event.target;
@@ -72,7 +72,7 @@ const Appbar = () => {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log("pref",data.preferences)
+          //console.log("pref",data.preferences)
 
           if (data.preferences.sports && data.preferences.teams) {
             setFavouriteSports(data.preferences.sports);
@@ -190,8 +190,8 @@ const Appbar = () => {
                     <Dialog.Panel className="w-full max-h-screen overflow-y-auto p-4 max-w-xl rounded bg-white">
                     <div className="flex justify-end">
                     <button onClick={() => setIsDialogOpen(false)}>
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
                     </button>
                   </div>
@@ -209,7 +209,7 @@ const Appbar = () => {
                                   type="checkbox"
                                   id={sport.name}
                                   value={sport.name}
-                                  checked={favouriteSports[sport.name] || tempFavouriteSports[sport.name]  || false}
+                                  checked={ tempFavouriteSports[sport.name]  || false}
                                    onChange={handleSportCheckbox}
                                 />
                                 <label htmlFor={sport.name} className="ml-2">
@@ -226,7 +226,7 @@ const Appbar = () => {
                                   type="checkbox"
                                   id={team.name}
                                   value={team.name}
-                                  checked={favouriteTeams[team.name] ||tempFavouriteTeams[team.name]  || false}
+                                  checked={tempFavouriteTeams[team.name]  || false}
                                    onChange={handleTeamCheckbox}
                                 />
                                 <label htmlFor={team.name} className="ml-2">
