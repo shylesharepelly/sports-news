@@ -13,6 +13,16 @@ const ArticlesList: React.FC = () => {
 
   const state: any = useArticlesState();
 
+  const favoriteSports = JSON.parse(localStorage.getItem("favouriteSports") || "{}");
+
+  
+
+  // useEffect(() => {
+  //   fetchArticles(dispatchArticles);
+  // }, [dispatchArticles, favoriteSports]);
+
+
+  //console.log("favsports",favoriteSports)
   const [selectedSport, setSelectedSport] = useState("");
   const [selectedFilter, setSelectedFilter] = useState("date");
   // eslint-disable-next-line
@@ -25,8 +35,21 @@ const ArticlesList: React.FC = () => {
   if (isError) {
     return <span>{errorMessage}</span>;
   }
+
+
+  
+
+  // const filteredArticles = articles.filter((article:any) => {
+  //   return (
+  //     !selectedSport ||  (favoriteSports[selectedSport] && favoriteSports[selectedSport] === true) 
+  //   );
+  // });
+
+  
+
+
   const applyFilter = (article: any) => {
-    if (!selectedSport || article.sport.name === selectedSport) {
+    if ( article.sport.name === selectedSport) {
       switch (selectedFilter) {
         case "sportname":
           return article.sport.name.includes(filterValue);
@@ -38,6 +61,10 @@ const ArticlesList: React.FC = () => {
           return true;
       }
     }
+    else if(selectedSport==""){
+      return favoriteSports[article.sport.name] === true && article.teams.every((team: any) => favoriteSports[team.name] === true);
+       
+   }
     return false;
   };
 
@@ -55,6 +82,7 @@ const ArticlesList: React.FC = () => {
         return 0;
     }
   };
+
   return (
     <div>
       <div className="flex border bg-slate-200">
@@ -65,7 +93,7 @@ const ArticlesList: React.FC = () => {
                 selectedSport === "" ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-600"
               }`}
             >
-              News
+              Your News
             </button>
             {Array.from(new Set(articles.map((article: any) => article.sport.name))).map((sportName: any) => (
               <button

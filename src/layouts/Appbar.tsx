@@ -115,6 +115,8 @@ const Appbar = () => {
   const signout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userData");
+    localStorage.removeItem("favouriteSports");
+    localStorage.removeItem("favouriteTeams");
     navigate("/home");
   };
 
@@ -258,7 +260,7 @@ const Appbar = () => {
                     <Menu.Item>
                       <button
                         onClick={signout}
-                        className="block px-4 py-2 text-sm text-gray-700"
+                        className="block w-full px-4 py-2 text-sm text-gray-700"
                       >
                         Logout
                       </button>
