@@ -21,8 +21,8 @@ const Favouriteitems = ({ selectedSport, selectedTeam }:FavouriteItemsProps) => 
     useEffect(() => {
       fetchArticles(dispatchArticles);
     }, [dispatchArticles]);
-    console.log(selectedSport)
-    console.log(selectedTeam)
+    // console.log(selectedSport)
+    // console.log(selectedTeam)
   
     const state: any = useArticlesState();
 

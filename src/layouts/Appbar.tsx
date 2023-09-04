@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import { Disclosure  , Menu  } from "@headlessui/react";
 import Logo from "../assets/react.svg";
 import setting from "../assets/setting1.svg"
@@ -7,23 +7,102 @@ import { Link } from 'react-router-dom';
 import { Dialog } from '@headlessui/react';
 import { useSportsState } from '../context/sports/context';
 import { useTeamsState } from '../context/teams/context';
-import { Sport } from '../context/sports/reducer';
 import { Team } from '../context/teams/reducer';
+import { Sport } from '../context/sports/reducer';
+import { API_ENDPOINT } from '../config/constants';
+
+
 
 
 
 const Appbar = () => {
   const navigate = useNavigate();
-
   const authToken = localStorage.getItem("authToken");
+  console.log("auth",authToken)
   const userData = localStorage.getItem("userData");
+  // console.log("user",userData)
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const [favouriteSports, setFavouriteSports] = useState<{ [sportName: string]: boolean }>({});
+  const [favouriteTeams, setFavouriteTeams] = useState<{ [teamName: string]: boolean }>({});
+  
+
+
+  console.log("favsports",favouriteSports)
+  console.log("favteams",favouriteTeams)
+
+  const handleSportCheckbox = (event:any) =>{
+    const { id, checked } = event.target;
+    setFavouriteSports((previousSports) => ({
+      ...previousSports,
+      [id]: checked,
+    }));
+  }
+
+  const handleTeamCheckbox = (event:any) =>{
+    const { id, checked } = event.target;
+    setFavouriteTeams((previousTeams) => ({
+      ...previousTeams,
+      [id]: checked,
+    }));
+  }
 
   const sports = useSportsState();
   const teams = useTeamsState();
 
-
   
+
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
+          method: "GET",
+          headers: {
+            "Authorization": `Bearer ${authToken}`,
+            "Content-Type": "application/json",
+            
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          //console.log("pref",data)
+          console.log("pref",data.preferences)
+
+          if (data.preferences.sports && data.preferences.teams) {
+            // setSportsData(data.preferences.sports);
+            // setTeamsData(data.preferences.teams);
+            setFavouriteSports(data.preferences.sports);
+            setFavouriteTeams(data.preferences.teams);
+            localStorage.setItem("favouriteSports", JSON.stringify(data.preferences.sports));
+            localStorage.setItem("favouriteTeams", JSON.stringify(data.preferences.teams));
+          } else {
+            setFavouriteSports({});
+            setFavouriteTeams({});
+          }
+        } else {
+          throw new Error("Failed to fetch data");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+    if(authToken){
+    fetchData();
+    }
+  }, []);
+
+  // console.log("sports",sportsData)
+  // console.log("sports",  Object.keys(sportsData).length)
+  // console.log("teams",teamsData)
+
+  const sports1 =  sports?.sports;
+  const teams1 =  teams?.teams;
+  
+
+  // console.log("sports1",sports1)
+  // console.log("teams1",teams1)
+
   const handleLinkClick = async () => {
     setIsDialogOpen(true);
   };
@@ -32,6 +111,38 @@ const Appbar = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("userData");
     navigate("/home");
+  };
+
+
+  const handleSave = async () => {
+    try {
+      const preferences = {
+        sports: favouriteSports,
+        teams: favouriteTeams,
+      };
+  
+      const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
+        method: "PATCH",
+        headers: {
+          "Authorization": `Bearer ${authToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ preferences }),
+      });
+  
+
+      if (!response.ok) {
+       // console.log("error")
+        throw new Error("Failed to save data");
+      }
+
+      console.log("Data saved successfully");
+
+      setIsDialogOpen(false);
+
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
 
@@ -47,10 +158,13 @@ const Appbar = () => {
               </div>
               <div >
               <Menu as="div" className="relative inline-block text-left">
+              {authToken ? (
                 <Menu.Button onClick={() => handleLinkClick()}  className="h-8 w-8 rounded-full  hover:bg-blue-600 flex items-center justify-center focus:outline-none">
                   <img className="h-6 w-6" src={setting}/>
                 </Menu.Button>
-
+              ): (
+                <></>
+                )}
                     <Dialog
                 open={isDialogOpen}
                 onClose={() => setIsDialogOpen(false)}
@@ -73,12 +187,14 @@ const Appbar = () => {
                     <div className="p-2 flex flex-wrap">
                       <h1 className="font-bold text-xl">Favourite Sports</h1>
                       <div className="py-2 flex flex-wrap">
-                            {sports?.sports.map((sport: any) => (
+                            {sports1?.map((sport: Sport) => (
                               <div key={sport.id} className="w-1/3 mb-4 px-2">
                                 <input
                                   type="checkbox"
                                   id={sport.name}
                                   value={sport.name}
+                                  checked={favouriteSports[sport.name] || false}
+                                   onChange={handleSportCheckbox}
                                 />
                                 <label htmlFor={sport.name} className="ml-2">
                                   {sport.name}
@@ -86,14 +202,16 @@ const Appbar = () => {
                               </div>
                             ))}
                       </div>
-                      <h1 className="font-bold text-xl">Favourite Sports</h1>
+                      <h1 className="font-bold text-xl">Favourite Teams</h1>
                       <div className="py-2 flex flex-wrap">
-                            {teams?.teams.map((team: any) => (
+                            {teams1?.map((team: Team) => (
                               <div key={team.id} className="w-1/3 mb-4 px-2">
                                 <input
                                   type="checkbox"
                                   id={team.name}
                                   value={team.name}
+                                  checked={favouriteTeams[team.name] || false}
+                                   onChange={handleTeamCheckbox}
                                 />
                                 <label htmlFor={team.name} className="ml-2">
                                   {team.name}
@@ -105,7 +223,7 @@ const Appbar = () => {
                       <button className="bg-gray-800 px-2 py-2 text-white hover:bg-blue-700 text-xl" onClick={() => setIsDialogOpen(false)}>
                         cancel
                       </button>
-                      <button className="bg-gray-800 px-2 py-2 mx-2 text-white  hover:bg-blue-700 text-xl">
+                      <button onClick={()=> handleSave()} className="bg-gray-800 px-2 py-2 mx-2 text-white  hover:bg-blue-700 text-xl">
                         save
                       </button>
                   </div>

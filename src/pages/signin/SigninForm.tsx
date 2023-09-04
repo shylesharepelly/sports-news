@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 
 export interface ApiResponse {
-    token: string;
+    auth_token: string;
     user: {
       id: number;
       name: string;
@@ -38,8 +38,9 @@ const SigninForm: React.FC = () => {
       console.log("Sign-in successful");
 
       const data  = await response.json() as ApiResponse;
-      console.log(data)
-      localStorage.setItem("authToken", data.token);
+      // console.log("data",data)
+      // console.log("data",data.user)
+      localStorage.setItem("authToken", data.auth_token);
       localStorage.setItem("userData", JSON.stringify(data.user));
       navigate("/home");
     } catch (error) {
