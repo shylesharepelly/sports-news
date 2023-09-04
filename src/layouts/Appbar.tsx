@@ -26,14 +26,20 @@ const Appbar = () => {
   const [favouriteSports, setFavouriteSports] = useState<{ [sportName: string]: boolean }>({});
   const [favouriteTeams, setFavouriteTeams] = useState<{ [teamName: string]: boolean }>({});
   
+  const [tempFavouriteSports, setTempFavouriteSports] = useState<{ [sportName: string]: boolean }>({});
+  const [tempFavouriteTeams, setTempFavouriteTeams] = useState<{ [teamName: string]: boolean }>({});
 
+
+
+  console.log("tempsports",tempFavouriteSports)
+  console.log("tempteams",tempFavouriteTeams)
 
   console.log("favsports",favouriteSports)
   console.log("favteams",favouriteTeams)
 
   const handleSportCheckbox = (event:any) =>{
     const { id, checked } = event.target;
-    setFavouriteSports((previousSports) => ({
+    setTempFavouriteSports((previousSports) => ({
       ...previousSports,
       [id]: checked,
     }));
@@ -41,7 +47,7 @@ const Appbar = () => {
 
   const handleTeamCheckbox = (event:any) =>{
     const { id, checked } = event.target;
-    setFavouriteTeams((previousTeams) => ({
+    setTempFavouriteTeams((previousTeams) => ({
       ...previousTeams,
       [id]: checked,
     }));
@@ -66,12 +72,9 @@ const Appbar = () => {
         });
         if (response.ok) {
           const data = await response.json();
-          //console.log("pref",data)
           console.log("pref",data.preferences)
 
           if (data.preferences.sports && data.preferences.teams) {
-            // setSportsData(data.preferences.sports);
-            // setTeamsData(data.preferences.teams);
             setFavouriteSports(data.preferences.sports);
             setFavouriteTeams(data.preferences.teams);
             localStorage.setItem("favouriteSports", JSON.stringify(data.preferences.sports));
@@ -104,6 +107,8 @@ const Appbar = () => {
   // console.log("teams1",teams1)
 
   const handleLinkClick = async () => {
+    setTempFavouriteSports(favouriteSports);
+    setTempFavouriteTeams(favouriteTeams);
     setIsDialogOpen(true);
   };
 
@@ -113,12 +118,23 @@ const Appbar = () => {
     navigate("/home");
   };
 
+  const handleCancel = () => {
+    setTempFavouriteSports(favouriteSports);
+    setTempFavouriteTeams(favouriteTeams);
+    setIsDialogOpen(false);
+  };
+
 
   const handleSave = async () => {
+    setFavouriteSports(tempFavouriteSports);
+    setFavouriteTeams(tempFavouriteTeams);
+    localStorage.setItem("favouriteSports", JSON.stringify(tempFavouriteSports));
+    localStorage.setItem("favouriteTeams", JSON.stringify(tempFavouriteTeams));
+
     try {
       const preferences = {
-        sports: favouriteSports,
-        teams: favouriteTeams,
+        sports: tempFavouriteSports,
+        teams: tempFavouriteTeams,
       };
   
       const response = await fetch(`${API_ENDPOINT}/user/preferences`, {
@@ -193,7 +209,7 @@ const Appbar = () => {
                                   type="checkbox"
                                   id={sport.name}
                                   value={sport.name}
-                                  checked={favouriteSports[sport.name] || false}
+                                  checked={favouriteSports[sport.name] || tempFavouriteSports[sport.name]  || false}
                                    onChange={handleSportCheckbox}
                                 />
                                 <label htmlFor={sport.name} className="ml-2">
@@ -210,7 +226,7 @@ const Appbar = () => {
                                   type="checkbox"
                                   id={team.name}
                                   value={team.name}
-                                  checked={favouriteTeams[team.name] || false}
+                                  checked={favouriteTeams[team.name] ||tempFavouriteTeams[team.name]  || false}
                                    onChange={handleTeamCheckbox}
                                 />
                                 <label htmlFor={team.name} className="ml-2">
@@ -220,7 +236,7 @@ const Appbar = () => {
                             ))}
                       </div>
 
-                      <button className="bg-gray-800 px-2 py-2 text-white hover:bg-blue-700 text-xl" onClick={() => setIsDialogOpen(false)}>
+                      <button className="bg-gray-800 px-2 py-2 text-white hover:bg-blue-700 text-xl" onClick={() => handleCancel()}>
                         cancel
                       </button>
                       <button onClick={()=> handleSave()} className="bg-gray-800 px-2 py-2 mx-2 text-white  hover:bg-blue-700 text-xl">
