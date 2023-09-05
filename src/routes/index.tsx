@@ -3,6 +3,7 @@ import Signin from "../pages/signin";
 import Signup from "../pages/signup";
 import  Home  from "../pages/Home";
 import UpdatePassword from "../pages/updatePassword";
+import ProtectedRoute from "./ProtectedRoute";
 
 const router = createBrowserRouter([
   { path: "/", element: <Navigate to="/home" replace /> },
@@ -21,7 +22,13 @@ const router = createBrowserRouter([
   },
   {
     path:"updatepassword",
-    element:<UpdatePassword/>
+    element:
+    (
+      <ProtectedRoute>
+        <UpdatePassword/>
+      </ProtectedRoute>
+    )
+   
   }
 ]);
 export default router;
