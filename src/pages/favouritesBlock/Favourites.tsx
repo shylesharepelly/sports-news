@@ -32,12 +32,19 @@ const Favourites: React.FC = () => {
         setSelectedTeam(event.target.value);
     };
 
+    const favoriteSports = JSON.parse(localStorage.getItem("favouriteSports") || "{}");
+    const favoriteSportsList = sportsState?.sports.filter((sport: any) => favoriteSports[sport.name] === true);
+
+    const favoriteTeams = JSON.parse(localStorage.getItem("favouriteTeams") || "{}");
+    const favoriteTeamsList = teamsState?.teams.filter((team: any) => favoriteTeams[team.name] === true);
+
+
     return (
       <div className="container">
         <div className="dropdown-container  p-4">
           <select className="dropdown p-2 border  border-black rounded-md" value={selectedSport} onChange={handleSportChange}>
             <option value="">Select Sport</option>
-            {sportsState?.sports.map((sport: any) => (
+            {favoriteSportsList?.map((sport: any) => (
               <option key={sport.id} value={sport.name}>
                 {sport.name}
               </option>
@@ -49,8 +56,7 @@ const Favourites: React.FC = () => {
           <div className="dropdown-container p-4">
             <select className="dropdown p-2 border  border-black rounded-md" value={selectedTeam} onChange={handleTeamChange}>
               <option value="">Select Team</option>
-              {teamsState?.teams
-                .filter((team: any) => team.plays === selectedSport)
+              {favoriteTeamsList?.filter((team: any) => team.plays === selectedSport)
                 .map((team: any) => (
                   <option key={team.id} value={team.name}>
                     {team.name}
