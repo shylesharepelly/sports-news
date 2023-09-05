@@ -22,9 +22,19 @@ export default function LiveMatches() {
     return <span>{errorMessage}</span>;
   }
 
-  const live= matches.filter((match:any)=>
-  favoriteSports[match.sportName] === true && match.teams.some((team: any) => favoriteTeams[team.name] === true)
-  )
+  const live= matches.filter((match:any)=>{
+  //favoriteSports[match.sportName] === true && match.teams.some((team: any) => favoriteTeams[team.name] === true)
+  const isFavoriteSport = favoriteSports[match.sportName] === true;
+  const hasFavoriteTeams = Object.values(favoriteTeams).some((value) => value === true);
+  if (isFavoriteSport && !hasFavoriteTeams) {
+    return true;
+  }
+  
+  if (isFavoriteSport && hasFavoriteTeams) {
+    return match.teams.some((team:any) => favoriteTeams[team.name] === true);
+  }
+  return false;
+})
 
   if(authToken && live.length==0)
   {
@@ -35,7 +45,7 @@ export default function LiveMatches() {
     <div className="flex px-4">
       {authToken ? (
       live?.map((match: any) => (
-            <LivematchItem key={match.id} id={match.id} />
+            <LivematchItem key={match.id} id={match.id} />  
         ))
       ):(
         matches.map((match: any) => (
