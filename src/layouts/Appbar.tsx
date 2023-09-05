@@ -16,7 +16,6 @@ import Livescore from '../pages/livescores'
 import Favourites from '../pages/favouritesBlock'
 import Articles from '../pages/articles'
 
-
 const Appbar = () => {
   const navigate = useNavigate();
   const authToken = localStorage.getItem("authToken");
@@ -260,14 +259,32 @@ const Appbar = () => {
                 </Menu.Button>
                 <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                 {authToken ? (
+                  <div>
                     <Menu.Item>
-                      <button
-                        onClick={signout}
-                        className="block w-full px-4 py-2 text-sm text-gray-700"
-                      >
-                        Logout
-                      </button>
+                    {({ active }) => (
+                      <button className={`${
+                        active ? 'bg-gray-100' : ''
+                      } block w-full px-4 py-2 text-sm text-gray-700`}>
+                      <Link to="/updatepassword" >
+                        Change Password
+                      </Link>
+                    </button>
+                    )}
+                      
                     </Menu.Item>
+                    <Menu.Item>
+                    {({ active }) => (
+                       <button
+                       onClick={signout}
+                       className={`${
+                         active ? 'bg-gray-100' : ''
+                       } block w-full px-4 py-2 text-sm text-gray-700`}>
+                       Logout
+                     </button>
+                    )}
+                     
+                    </Menu.Item>
+                    </div>
                   ) : (
                     <>
                   <Menu.Item>
