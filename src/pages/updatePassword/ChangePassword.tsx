@@ -17,6 +17,7 @@ export interface ApiResponse {
 const ChangePasswordForm: React.FC = () => {
   const [current_password, setCurrentPassword] = useState("");
   const [new_password, setNewPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const authToken = localStorage.getItem("authToken");
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -40,7 +41,8 @@ const ChangePasswordForm: React.FC = () => {
       console.log("Password updated successfully");
 
       navigate("/home");
-    } catch (error) {
+    } catch (error:any) {
+      setError(error.message);
       console.error("update password failed:", error);
     }
   };
@@ -48,6 +50,11 @@ const ChangePasswordForm: React.FC = () => {
   return (
     <div>
     <form  onSubmit={ (event) => void handleSubmit(event)}>
+    {error && (
+          <div className="bg-red-200 text-red-800 p-2 rounded-md mb-4">
+            {error}
+          </div>
+        )}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">Current Password:</label>
         <input
