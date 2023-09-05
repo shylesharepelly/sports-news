@@ -4,24 +4,23 @@ import React, { Suspense } from "react";
 const AllMatches = React.lazy(() => import("./AllMatches"));
 import ErrorBoundary from "../../components/ErrorBoundary";
 
-  const Livescore = () => {
-
+const Livescore = () => {
   return (
     <div>
-      <div className='font-bold text-xl px-5 py-2'>Live Games</div>
-        <div className="flex px-4 py-2  shadow-lg">
-          <div className="flex space-x-10">
+      <div className="font-bold text-xl px-5 py-2">Live Games</div>
+      <div className="flex px-4 py-2  shadow-lg">
+        <div className="flex space-x-10">
           <ErrorBoundary>
-            <Suspense fallback={<div className="suspense-loading">Loading...</div>}>
-              <AllMatches/>
+            <Suspense
+              fallback={<div className="suspense-loading">Loading...</div>}
+            >
+              <AllMatches />
             </Suspense>
           </ErrorBoundary>
-            
-          </div>
         </div>
+      </div>
     </div>
-
   );
-}
+};
 
 export default Livescore;

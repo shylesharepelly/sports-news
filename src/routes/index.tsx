@@ -1,7 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Signin from "../pages/signin";
 import Signup from "../pages/signup";
-import  Home  from "../pages/Home";
+import Home from "../pages/Home";
 import UpdatePassword from "../pages/updatePassword";
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -15,20 +15,18 @@ const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
   },
-  
+
   {
     path: "/home",
     element: <Home />,
   },
   {
-    path:"updatepassword",
-    element:
-    (
+    path: "updatepassword",
+    element: (
       <ProtectedRoute>
-        <UpdatePassword/>
+        <UpdatePassword />
       </ProtectedRoute>
-    )
-   
-  }
+    ),
+  },
 ]);
 export default router;

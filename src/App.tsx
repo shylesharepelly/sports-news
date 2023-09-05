@@ -3,7 +3,7 @@ import { RouterProvider } from "react-router-dom";
 import "./App.css";
 import router from "./routes";
 
-import { ArticlesProvider } from './context/articles/context.tsx'
+import { ArticlesProvider } from "./context/articles/context.tsx";
 import { MatchesProvider } from "./context/livescores/context.tsx";
 import { TeamsProvider } from "./context/teams/context.tsx";
 import { SportsProvider } from "./context/sports/context.tsx";

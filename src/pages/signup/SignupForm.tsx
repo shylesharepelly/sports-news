@@ -29,23 +29,23 @@ const SignupForm: React.FC = () => {
       }
       console.log("Sign-up successful");
 
-      const data = await response.json() as ApiResponse;
+      const data = (await response.json()) as ApiResponse;
       localStorage.setItem("authToken", data.auth_token);
-      console.log(data.auth_token)
+      console.log(data.auth_token);
       localStorage.setItem("userData", JSON.stringify(data.user));
-      console.log(data)
-     
+      console.log(data);
+
       navigate("/home");
-    } catch (error:any) {
+    } catch (error: any) {
       setError(error.message);
       console.error("Sign-up failed:", error);
     }
   };
 
   return (
-    <form onSubmit={ (event) => void handleSubmit(event)}>
+    <form onSubmit={(event) => void handleSubmit(event)}>
       <div className="items-center justify-center ">
-      {error && (
+        {error && (
           <div className="bg-red-200 text-red-800 p-2 rounded-md mb-4">
             {error}
           </div>

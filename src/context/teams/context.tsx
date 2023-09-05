@@ -5,10 +5,11 @@ const TeamsStateContext = createContext<TeamsState | undefined>(undefined);
 
 export const useTeamsState = () => useContext(TeamsStateContext);
 type TeamsDispatch = React.Dispatch<TeamsActions>;
-const TeamsDispatchContext = createContext<TeamsDispatch | undefined>(undefined);
+const TeamsDispatchContext = createContext<TeamsDispatch | undefined>(
+  undefined,
+);
 
 export const useTeamsDispatch = () => useContext(TeamsDispatchContext);
-
 
 export const TeamsProvider: React.FC<React.PropsWithChildren> = ({
   children,
@@ -23,4 +24,3 @@ export const TeamsProvider: React.FC<React.PropsWithChildren> = ({
     </TeamsStateContext.Provider>
   );
 };
-

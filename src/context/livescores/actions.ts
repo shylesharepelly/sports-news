@@ -1,18 +1,21 @@
-import { API_ENDPOINT } from '../../config/constants';
+import { API_ENDPOINT } from "../../config/constants";
 
 export const fetchMatches = async (dispatch: any) => {
   try {
     dispatch({ type: "FETCH_MATCHES_REQUEST" });
     const response = await fetch(`${API_ENDPOINT}/matches`, {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json'},
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
     });
     const data = await response.json();
     //console.log("data",data)
     //console.log("data",data.matches)
     dispatch({ type: "FETCH_MATCHES_SUCCESS", payload: data.matches });
   } catch (error) {
-    console.log('Error fetching matches:', error);
-    dispatch({ type: "FETCH_MATCHES_FAILURE", payload: 'Unable to load matches' });
+    console.log("Error fetching matches:", error);
+    dispatch({
+      type: "FETCH_MATCHES_FAILURE",
+      payload: "Unable to load matches",
+    });
   }
 };

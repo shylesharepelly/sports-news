@@ -1,56 +1,55 @@
 export interface Team {
-    id: number,
-    name: string,
-    plays:string
+  id: number;
+  name: string;
+  plays: string;
 }
-    
+
 export interface TeamsState {
-    teams: Team[],
-    isLoading: boolean,
-    isError: boolean,
-    errorMessage: string
+  teams: Team[];
+  isLoading: boolean;
+  isError: boolean;
+  errorMessage: string;
 }
 
 export const initialState: TeamsState = {
-    teams: [],
-    isLoading: false,
-    isError: false,
-    errorMessage: "",
+  teams: [],
+  isLoading: false,
+  isError: false,
+  errorMessage: "",
 };
 
 export type TeamsActions =
-    | { type: "FETCH_TEAMS_REQUEST" }
-    | { type: "FETCH_TEAMS_SUCCESS"; payload: Team[] }
-    | { type: "FETCH_TEAMS_FAILURE"; payload: string }
+  | { type: "FETCH_TEAMS_REQUEST" }
+  | { type: "FETCH_TEAMS_SUCCESS"; payload: Team[] }
+  | { type: "FETCH_TEAMS_FAILURE"; payload: string };
 
 export const reducer = (
-    state: TeamsState = initialState,
-    action: TeamsActions
+  state: TeamsState = initialState,
+  action: TeamsActions,
 ): TeamsState => {
-
-    switch (action.type) {
+  switch (action.type) {
     case "FETCH_TEAMS_REQUEST":
-        return {
+      return {
         ...state,
         isLoading: true,
-        };
+      };
 
     case "FETCH_TEAMS_SUCCESS":
-        return {
+      return {
         ...state,
         isLoading: false,
         teams: action.payload,
-        };
+      };
 
     case "FETCH_TEAMS_FAILURE":
-        return {
+      return {
         ...state,
         isLoading: false,
         isError: true,
         errorMessage: action.payload,
-        };
-        
+      };
+
     default:
-        return state;
-    }
+      return state;
+  }
 };

@@ -9,7 +9,7 @@ const getStoredValue = <T>(key: string, defaultValue: T): T => {
 
 export const useLocalStorage = <T>(
   key: string,
-  defaultValue: T
+  defaultValue: T,
 ): [T, React.Dispatch<React.SetStateAction<T>>] => {
   const [value, setValue] = useState(() => {
     return getStoredValue(key, defaultValue);

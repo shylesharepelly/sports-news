@@ -1,15 +1,23 @@
 import React, { createContext, useContext, useReducer } from "react";
 
-import { reducer, initialState, ArticlesState, ArticlesActions } from "./reducer";
+import {
+  reducer,
+  initialState,
+  ArticlesState,
+  ArticlesActions,
+} from "./reducer";
 
-const ArticlesStateContext = createContext<ArticlesState | undefined>(undefined);
-
+const ArticlesStateContext = createContext<ArticlesState | undefined>(
+  undefined,
+);
 
 export const useArticlesState = () => useContext(ArticlesStateContext);
 export const useArticlesDispatch = () => useContext(ArticlesDispatchContext);
 
 type ArticlesDispatch = React.Dispatch<ArticlesActions>;
-const ArticlesDispatchContext = createContext<ArticlesDispatch | undefined>(undefined);
+const ArticlesDispatchContext = createContext<ArticlesDispatch | undefined>(
+  undefined,
+);
 
 export const ArticlesProvider: React.FC<React.PropsWithChildren> = ({
   children,
@@ -24,4 +32,3 @@ export const ArticlesProvider: React.FC<React.PropsWithChildren> = ({
     </ArticlesStateContext.Provider>
   );
 };
-
