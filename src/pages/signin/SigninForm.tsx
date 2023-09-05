@@ -19,6 +19,7 @@ export interface ApiResponse {
 const SigninForm: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -43,7 +44,8 @@ const SigninForm: React.FC = () => {
       localStorage.setItem("authToken", data.auth_token);
       localStorage.setItem("userData", JSON.stringify(data.user));
       navigate("/home");
-    } catch (error) {
+    } catch (error:any) {
+      setError(error.message);
       console.error("Sign-in failed:", error);
     }
   };
@@ -51,6 +53,11 @@ const SigninForm: React.FC = () => {
   return (
     <div>
     <form  onSubmit={ (event) => void handleSubmit(event)}>
+    {error && (
+          <div className="bg-red-200 text-red-800 p-2 rounded-md mb-4">
+            {error}
+          </div>
+        )}
       <div>
         <label className="block text-gray-700 font-semibold mb-2">Email:</label>
         <input

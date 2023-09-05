@@ -7,6 +7,7 @@ const SignupForm: React.FC = () => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -35,7 +36,8 @@ const SignupForm: React.FC = () => {
       console.log(data)
      
       navigate("/home");
-    } catch (error) {
+    } catch (error:any) {
+      setError(error.message);
       console.error("Sign-up failed:", error);
     }
   };
@@ -43,7 +45,11 @@ const SignupForm: React.FC = () => {
   return (
     <form onSubmit={ (event) => void handleSubmit(event)}>
       <div className="items-center justify-center ">
-        
+      {error && (
+          <div className="bg-red-200 text-red-800 p-2 rounded-md mb-4">
+            {error}
+          </div>
+        )}
         <div>
           <label className="block text-gray-700 font-semibold mb-2">
             Your Name:
