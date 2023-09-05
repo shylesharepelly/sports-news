@@ -16,6 +16,9 @@ const Favourites: React.FC = () => {
   
     const [selectedSport, setSelectedSport] = useState<string>("");
     const [selectedTeam, setSelectedTeam] = useState<string>("");
+
+
+    const authToken = localStorage.getItem("authToken");
   
     useEffect(() => {
       fetchSports(sportsDispatch);
@@ -44,11 +47,20 @@ const Favourites: React.FC = () => {
         <div className="dropdown-container  p-4">
           <select className="dropdown p-2 border  border-black rounded-md" value={selectedSport} onChange={handleSportChange}>
             <option value="">Select Sport</option>
-            {favoriteSportsList?.map((sport: any) => (
+            {authToken ? (
+            favoriteSportsList?.map((sport: any) => (
               <option key={sport.id} value={sport.name}>
                 {sport.name}
               </option>
-            ))}
+            ))
+            ):(
+              sportsState?.sports.map((sport: any) => (
+                <option key={sport.id} value={sport.name}>
+                  {sport.name}
+                </option>
+              ))
+            )
+              }
           </select>
         </div>
 
@@ -56,12 +68,21 @@ const Favourites: React.FC = () => {
           <div className="dropdown-container p-4">
             <select className="dropdown p-2 border  border-black rounded-md" value={selectedTeam} onChange={handleTeamChange}>
               <option value="">Select Team</option>
-              {favoriteTeamsList?.filter((team: any) => team.plays === selectedSport)
+              {authToken ? (
+              favoriteTeamsList?.filter((team: any) => team.plays === selectedSport)
                 .map((team: any) => (
                   <option key={team.id} value={team.name}>
                     {team.name}
                   </option>
-                ))}
+                ))
+        ): (
+          teamsState?.teams.filter((team: any) => team.plays === selectedSport)
+            .map((team: any) => (
+              <option key={team.id} value={team.name}>
+                {team.name}
+              </option>
+            ))
+        ) }
             </select>
           </div>
         )}

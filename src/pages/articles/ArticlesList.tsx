@@ -14,8 +14,9 @@ const ArticlesList: React.FC = () => {
   const state: any = useArticlesState();
 
   const favoriteSports = JSON.parse(localStorage.getItem("favouriteSports") || "{}");
-
   
+  const favoriteTeams = JSON.parse(localStorage.getItem("favouriteTeams") || "{}");
+  const authToken = localStorage.getItem("authToken");
 
   // useEffect(() => {
   //   fetchArticles(dispatchArticles);
@@ -62,8 +63,12 @@ const ArticlesList: React.FC = () => {
       }
     }
     else if(selectedSport==""){
-      return favoriteSports[article.sport.name] === true && article.teams.every((team: any) => favoriteSports[team.name] === true);
-       
+      if(authToken){
+      return favoriteSports[article.sport.name] === true && article.teams.every((team: any) => favoriteTeams[team.name] === true);
+      }
+      else{
+        return true
+      }
    }
     return false;
   };
