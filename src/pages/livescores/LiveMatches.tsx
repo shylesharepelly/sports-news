@@ -6,6 +6,13 @@ import {
 export default function LiveMatches() {
   const state: any = useMatchesState();
 
+
+  const favoriteSports = JSON.parse(localStorage.getItem("favouriteSports") || "{}");
+  const favoriteTeams = JSON.parse(localStorage.getItem("favouriteTeams") || "{}");
+  const authToken = localStorage.getItem("authToken");
+
+
+
   const { matches, isLoading, isError, errorMessage } = state;
  // console.log("matches",matches)
   if (matches.length === 0 && isLoading) {
@@ -15,16 +22,29 @@ export default function LiveMatches() {
     return <span>{errorMessage}</span>;
   }
 
+  const live= matches.filter((match:any)=>
+  favoriteSports[match.sportName] === true && match.teams.some((team: any) => favoriteTeams[team.name] === true)
+  )
 
+  if(authToken && live.length==0)
+  {
+    return <h1>No Live Matches</h1>
+  }
   return (
     <>
     <div className="flex px-4">
-      {matches.map((match: any) => (
-          
+      {authToken ? (
+      live?.map((match: any) => (
             <LivematchItem key={match.id} id={match.id} />
-          
-        ))}
-    </div>
+        ))
+      ):(
+        matches.map((match: any) => (
+          <LivematchItem key={match.id} id={match.id} />
+        
+      ))
+      )
+      }
+      </div>
     </>
   );
 }

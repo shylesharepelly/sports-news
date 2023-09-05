@@ -64,7 +64,8 @@ const ArticlesList: React.FC = () => {
     }
     else if(selectedSport==""){
       if(authToken){
-      return favoriteSports[article.sport.name] === true && article.teams.every((team: any) => favoriteTeams[team.name] === true);
+      return favoriteSports[article.sport.name] === true && 
+      ( article.teams.length === 0  || article.teams.some((team: any) => favoriteTeams[team.name] === true));
       }
       else{
         return true
