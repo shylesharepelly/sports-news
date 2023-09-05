@@ -1,6 +1,7 @@
 import { useState , useEffect } from 'react';
 import { Disclosure  , Menu  } from "@headlessui/react";
 import Logo from "../assets/react.svg";
+import logo11 from "../assets/logo11.jpeg"
 import setting from "../assets/setting1.svg"
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
@@ -173,7 +174,7 @@ const Appbar = () => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center">
-                <img className="h-8 mr-2" src={Logo} alt="Logo" />
+                <img className="h-12 w-18 mr-2" src={logo11} alt="Logo" />
                 <span className="font-bold text-xl">SPORTS NEWS</span>
               </div>
               <div >

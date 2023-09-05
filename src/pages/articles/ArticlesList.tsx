@@ -91,7 +91,7 @@ const ArticlesList: React.FC = () => {
 
   return (
     <div>
-      <div className="flex border bg-slate-200">
+      <div className="flex border shadow-lg bg-slate-100">
         <div className="w-full p-2">
           <div className="px-5 mb-4 flex">
             <button  onClick={() => setSelectedSport("")}
@@ -106,7 +106,7 @@ const ArticlesList: React.FC = () => {
                 key={sportName}
                 onClick={() => setSelectedSport(sportName)}
                 className={`px-4 py-2 mr-2 text-sm font-medium rounded ${
-                  selectedSport === sportName ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-600"
+                  selectedSport === sportName ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-600 hover:border border-b-black"
                 }`}
               >
                 {sportName}
@@ -117,14 +117,11 @@ const ArticlesList: React.FC = () => {
         </div>
 
         <div className="w-full p-4">
-      
-
-          <div className="mb-4 flex items-center justify-end">
-          
+          <div className="mb-2 flex items-center justify-end">
             <select
               value={selectedFilter}
               onChange={(e) => setSelectedFilter(e.target.value)}
-              className="px-4 py-2 text-sm rounded font-bold bg-gray-100 text-gray-600"
+              className="px-4 py-2 text-sm rounded border border-black font-bold bg-white text-gray-600"
             >
               <option value="sportname">Sport Name</option>
               <option value="date">Date</option>
