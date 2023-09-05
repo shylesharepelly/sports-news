@@ -12,7 +12,9 @@ import { Sport } from '../context/sports/reducer';
 import { API_ENDPOINT } from '../config/constants';
 
 
-
+import Livescore from '../pages/livescores'
+import Favourites from '../pages/favouritesBlock'
+import Articles from '../pages/articles'
 
 
 const Appbar = () => {
@@ -165,6 +167,7 @@ const Appbar = () => {
 
 
   return (
+    <div>
     <Disclosure as="nav" className="bg-gray-100 shadow-lg">
       {() => (
         <>
@@ -302,6 +305,21 @@ const Appbar = () => {
         </>
       )}
     </Disclosure>
+    <div className='bg-white'>
+          <div>
+              <Livescore/>
+          </div>
+          <h1 className="font-bold text-xl p-4">Trending News</h1>
+          <div className="flex flex-col lg:flex-row">
+            <div className="lg:w-3/4 shadow-lg">
+              <Articles />
+            </div>
+            <div className="lg:w-1/4 shadow-lg">
+              <Favourites />
+            </div>
+          </div>
+      </div>
+    </div>
   );
 };
 
