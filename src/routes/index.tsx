@@ -4,6 +4,7 @@ import Signup from "../pages/signup";
 import Home from "../pages/Home";
 import UpdatePassword from "../pages/updatePassword";
 import ProtectedRoute from "./ProtectedRoute";
+import NotFound from "../pages/Notfound";
 
 const router = createBrowserRouter([
   { path: "/", element: <Navigate to="/home" replace /> },
@@ -28,5 +29,10 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
+
 ]);
 export default router;
