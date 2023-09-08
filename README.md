@@ -5,7 +5,7 @@ This is a Sports News and Scores Dashboard built using React with Typescript whi
 
 Deployed App Link: https://main--aesthetic-mochi-ff6b7e.netlify.app/
 
-Video Demo Link: 
+Video Demo Link: https://t9002207677.p.clickup-attachments.com/t9002207677/9ae04724-bdc2-4f2a-a071-c1ea3dad270b/WD301-capstone.mp4?view=open
 
 ## Features
 
