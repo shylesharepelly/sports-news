@@ -93,7 +93,7 @@ export default function ArticleListItems({ article }: { article: Article }) {
         className="relative z-50"
       >
         <div className="fixed inset-0 flex items-center justify-center p-4">
-          <Dialog.Panel className="w-full max-h-screen overflow-y-auto p-4 max-w-xl rounded bg-white">
+          <Dialog.Panel className="w-full max-h-screen overflow-y-auto p-4 max-w-xl rounded bg-white dark:bg-gray-500">
             <div className="flex justify-end">
               <button onClick={() => setIsDialogOpen(false)}>
                 <svg
@@ -116,7 +116,7 @@ export default function ArticleListItems({ article }: { article: Article }) {
               <div>
                 <Dialog.Title
                   key={selectedArticleId}
-                  className="bg-white shadow-lg font-bold text-xl py-2"
+                  className="bg-white shadow-lg font-bold text-xl py-2 dark:bg-gray-600"
                 >
                   {articleData.title}
                 </Dialog.Title>
