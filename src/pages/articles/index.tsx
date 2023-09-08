@@ -6,7 +6,7 @@ import ErrorBoundary from "../../components/ErrorBoundary";
 
 const Articles = () => {
   return (
-    <div className="bg-slate-200">
+    <div className="bg-slate-200 dark:bg-gray-600">
       <ErrorBoundary>
         <Suspense fallback={<div className="suspense-loading">Loading...</div>}>
           <ArticlesList />

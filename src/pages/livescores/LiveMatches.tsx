@@ -38,7 +38,7 @@ export default function LiveMatches() {
   });
 
   if (authToken && live.length == 0) {
-    return <h1>No Live Matches</h1>;
+    return <h1 className="dark:text-black">No Live Matches</h1>;
   }
   return (
     <>

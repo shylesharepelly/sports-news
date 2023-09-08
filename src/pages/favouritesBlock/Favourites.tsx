@@ -52,19 +52,29 @@ const Favourites: React.FC = () => {
     <div className="container">
       <div className="dropdown-container  p-4">
         <select
-          className="dropdown p-2 border  border-black rounded-md"
+          className="dropdown p-2 border  border-black dark:border-white rounded-md dark:bg-gray-600"
           value={selectedSport}
           onChange={handleSportChange}
         >
-          <option value="">Select Sport</option>
+          <option value="" className="dark:bg-gray-600">
+            Select Sport
+          </option>
           {authToken
             ? favoriteSportsList?.map((sport: any) => (
-                <option key={sport.id} value={sport.name}>
+                <option
+                  key={sport.id}
+                  value={sport.name}
+                  className="dark:bg-gray-600"
+                >
                   {sport.name}
                 </option>
               ))
             : sportsState?.sports.map((sport: any) => (
-                <option key={sport.id} value={sport.name}>
+                <option
+                  key={sport.id}
+                  value={sport.name}
+                  className="dark:bg-gray-600"
+                >
                   {sport.name}
                 </option>
               ))}
@@ -74,23 +84,33 @@ const Favourites: React.FC = () => {
       {selectedSport && (
         <div className="dropdown-container p-4">
           <select
-            className="dropdown p-2 border  border-black rounded-md"
+            className="dropdown p-2 border dark:bg-gray-600 dark:border-white  border-black rounded-md"
             value={selectedTeam}
             onChange={handleTeamChange}
           >
-            <option value="">Select Team</option>
+            <option value="" className="dark:bg-gray-600">
+              Select Team
+            </option>
             {authToken
               ? favoriteTeamsList
                   ?.filter((team: any) => team.plays === selectedSport)
                   .map((team: any) => (
-                    <option key={team.id} value={team.name}>
+                    <option
+                      key={team.id}
+                      value={team.name}
+                      className="dark:bg-gray-600"
+                    >
                       {team.name}
                     </option>
                   ))
               : teamsState?.teams
                   .filter((team: any) => team.plays === selectedSport)
                   .map((team: any) => (
-                    <option key={team.id} value={team.name}>
+                    <option
+                      key={team.id}
+                      value={team.name}
+                      className="dark:bg-gray-600"
+                    >
                       {team.name}
                     </option>
                   ))}

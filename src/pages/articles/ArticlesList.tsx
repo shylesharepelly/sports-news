@@ -90,7 +90,7 @@ const ArticlesList: React.FC = () => {
 
   return (
     <div>
-      <div className="flex border shadow-lg bg-slate-100">
+      <div className="flex border shadow-lg bg-slate-100 dark:bg-gray-600">
         <div className="w-full p-2">
           <div className="px-5 mb-4 flex">
             <button

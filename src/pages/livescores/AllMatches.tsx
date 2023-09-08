@@ -9,7 +9,7 @@ const AllMatches: React.FC = () => {
     fetchMatches(dispatchMatches);
   }, []);
   return (
-    <div className="grid gap-4 grid-cols-2 mt-5">
+    <div className="grid gap-4 grid-cols-2 mt-5 ">
       <LiveMatches />
     </div>
   );

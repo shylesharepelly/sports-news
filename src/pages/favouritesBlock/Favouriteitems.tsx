@@ -83,11 +83,14 @@ const Favouriteitems = ({
   });
 
   return (
-    <div className="m-4 bg-gray-200">
+    <div className="m-4 bg-gray-200 dark:bg-gray-600">
       <div className="m-2">
         {filteredArticles.map((item: any) => (
-          <div key={item.id} className="my-4 p-4 bg-white rounded-md flex">
-            <div className="flex-1 bg-white flex flex-col justify-center">
+          <div
+            key={item.id}
+            className="my-4 p-4 bg-white dark:bg-gray-400 rounded-md flex"
+          >
+            <div className="flex-1 bg-white dark:bg-gray-400 flex flex-col justify-center">
               <div>
                 <h3 className="text-xl font-bold mb-2">{item.title}</h3>
                 <p className="text-black-600 mb-2">{item.summary}</p>
@@ -109,7 +112,7 @@ const Favouriteitems = ({
               className="relative z-50"
             >
               <div className="fixed inset-0 flex items-center justify-center p-4">
-                <Dialog.Panel className="w-full max-h-screen overflow-y-auto p-4 max-w-xl rounded bg-white">
+                <Dialog.Panel className="w-full max-h-screen overflow-y-auto p-4 max-w-xl rounded bg-white dark:bg-gray-400">
                   <div className="flex justify-end">
                     <button onClick={() => setIsDialogOpen(false)}>
                       <svg
@@ -132,7 +135,7 @@ const Favouriteitems = ({
                     <div>
                       <Dialog.Title
                         key={selectedArticleId}
-                        className="bg-white shadow-lg font-bold text-xl py-2"
+                        className="bg-white shadow-lg font-bold text-xl py-2 dark:bg-gray-400"
                       >
                         {articleData.title}
                       </Dialog.Title>

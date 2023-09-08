@@ -58,7 +58,7 @@ export default function LivematchItem(props: Props, State: State) {
       <div className="flex px-4 py-2  shadow-lg">
         <div className="flex space-x-10">
           <div
-            className="bg-gray-100 rounded-lg shadow p-4 border border-black"
+            className="bg-gray-100 rounded-lg shadow p-4 border border-black  dark:bg-gray-600"
             key={Livematch.sportName}
           >
             <div className="flex justify-between space-x-3">

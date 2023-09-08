@@ -51,7 +51,10 @@ export default function ArticleListItems({ article }: { article: Article }) {
   return (
     <div>
       <div className="m-4">
-        <div key={article.id} className="my-4 p-4 bg-white rounded-md flex">
+        <div
+          key={article.id}
+          className="my-4 p-4 bg-white rounded-md flex dark:bg-gray-600"
+        >
           <div className="flex-1">
             <div>
               <h3 className="text-sm  mb-2">{article.sport.name}</h3>
@@ -68,7 +71,7 @@ export default function ArticleListItems({ article }: { article: Article }) {
               </h3>
               <button
                 onClick={() => handleLinkClick(article.id)}
-                className=" text-black  underline"
+                className=" text-black  underline dark:text-white"
               >
                 Read More...
               </button>
